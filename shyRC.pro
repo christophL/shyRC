@@ -13,8 +13,16 @@ TEMPLATE = app
 
 
 SOURCES += main.cpp\
-        mainwindow.cpp
+        mainwindow.cpp \
+    user.cpp \
+    server.cpp \
+    channel.cpp
 
-HEADERS  += mainwindow.h
+HEADERS  += mainwindow.h \
+    user.h \
+    server.h \
+    channel.h
 
 FORMS    += mainwindow.ui
+
+QMAKE_CXXFLAGS += -std=c++11
