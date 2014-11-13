@@ -26,3 +26,8 @@ HEADERS  += mainwindow.h \
 FORMS    += mainwindow.ui
 
 QMAKE_CXXFLAGS += -std=c++11
+
+unix: LIBS += -L$$PWD/libircclient/ -lircclient
+
+INCLUDEPATH += $$PWD/libircclient
+DEPENDPATH += $$PWD/libircclient

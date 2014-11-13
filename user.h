@@ -9,27 +9,25 @@
 #include "channel.h"
 
 
-using namespace std;
-
 class user {
 private:
-    string fullname;
-    string nick;
-    string nick2;
-    string nick3;
-    map<server, set<string>> favorite_channels;
+    std::string fullname;
+    std::string nick;
+    std::string nick2;
+    std::string nick3;
+    std::map<server, std::set<std::string>> favorite_channels;
 public:
     user() = default;
-    user(string fullname, string nick);
-    void set_fullname(string name);
-    void set_nick(string nick);
-    void set_nick2(string nick2);
-    void set_nick3(string nick3);
-    string get_fullname();
-    string get_nick();
-    string get_nick2();
-    string get_nick3();
-    bool add_favorite_channel(server server, string channel);
+    user(std::string fullname, std::string nick);
+    void set_fullname(std::string name);
+    void set_nick(std::string nick);
+    void set_nick2(std::string nick2);
+    void set_nick3(std::string nick3);
+    std::string get_fullname();
+    std::string get_nick();
+    std::string get_nick2();
+    std::string get_nick3();
+    bool add_favorite_channel(server& server, std::string channel);
 };
 
 #endif // USER_H

@@ -1,5 +1,7 @@
 #include "user.h"
 
+using namespace std;
+
 user::user(string fullname, string nick)
     : fullname(fullname), nick(nick) {
 }
@@ -36,6 +38,6 @@ void user::set_nick3(string nick3){
     this->nick3 = nick3;
 }
 
-bool user::add_favorite_channel(server server, string channel){
-    //TODO
+bool user::add_favorite_channel(server& serv, string channel){
+    return favorite_channels[serv].insert(channel).second;
 }
