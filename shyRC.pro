@@ -16,14 +16,17 @@ SOURCES += main.cpp\
         mainwindow.cpp \
     user.cpp \
     server.cpp \
-    channel.cpp
+    channel.cpp \
+    serverdialog.cpp
 
 HEADERS  += mainwindow.h \
     user.h \
     server.h \
-    channel.h
+    channel.h \
+    serverdialog.h
 
-FORMS    += mainwindow.ui
+FORMS    += mainwindow.ui \
+    serverdialog.ui
 
 QMAKE_CXXFLAGS += -std=c++11
 

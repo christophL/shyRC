@@ -6,19 +6,19 @@ user::user(string fullname, string nick)
     : fullname(fullname), nick(nick) {
 }
 
-string user::get_fullname(){
+string user::get_fullname() const{
     return fullname;
 }
 
-string user::get_nick(){
+string user::get_nick() const{
     return nick;
 }
 
-string user::get_nick2(){
+string user::get_nick2() const{
     return nick2;
 }
 
-string user::get_nick3(){
+string user::get_nick3() const{
     return nick3;
 }
 

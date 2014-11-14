@@ -3,7 +3,6 @@
 
 #include <string>
 
-class server;
 
 class server {
 private:

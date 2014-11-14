@@ -23,10 +23,10 @@ public:
     void set_nick(std::string nick);
     void set_nick2(std::string nick2);
     void set_nick3(std::string nick3);
-    std::string get_fullname();
-    std::string get_nick();
-    std::string get_nick2();
-    std::string get_nick3();
+    std::string get_fullname() const;
+    std::string get_nick() const;
+    std::string get_nick2() const;
+    std::string get_nick3() const;
     bool add_favorite_channel(server& server, std::string channel);
 };
 
