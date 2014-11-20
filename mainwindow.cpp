@@ -14,9 +14,16 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
+/**
+ * @brief MainWindow::on_actionConnect_triggered
+ * Called when the "Connect" menu entry is clicked.
+ * Opens a dialog in which the user can select his nick
+ * and server to connect to.
+ */
 void MainWindow::on_actionConnect_triggered()
 {
     serverDialog dialog(this);
     dialog.setModal(true);
     dialog.exec();
+    //TODO: start IRC connection
 }

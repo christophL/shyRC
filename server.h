@@ -7,15 +7,15 @@
 class server {
 private:
     std::string name;
-    std::string ipv4;
+    std::string address;
     uint16_t port;
 public:    
     server() = default;
     server(std::string name);
     void set_name(std::string name);
-    bool set_ip(std::string ipv4, uint16_t port);
+    bool set_address(std::string address, uint16_t port = 0);
     std::string get_name() const;
-    std::string get_ipv4() const;
+    std::string get_address() const;
     uint16_t get_port() const;
     bool operator==(const server& other) const;
     bool operator!=(const server& other) const;
