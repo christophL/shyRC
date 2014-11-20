@@ -17,13 +17,15 @@ SOURCES += main.cpp\
     user.cpp \
     server.cpp \
     channel.cpp \
-    serverdialog.cpp
+    serverdialog.cpp \
+    connection.cpp
 
 HEADERS  += mainwindow.h \
     user.h \
     server.h \
     channel.h \
-    serverdialog.h
+    serverdialog.h \
+    connection.h
 
 FORMS    += mainwindow.ui \
     serverdialog.ui
