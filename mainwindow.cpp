@@ -25,5 +25,9 @@ void MainWindow::on_actionConnect_triggered()
     serverDialog dialog(this);
     dialog.setModal(true);
     dialog.exec();
-    //TODO: start IRC connection
+
+    if(dialog.result() == QDialog::DialogCode::Accepted){
+        //TODO: start IRC connection
+    }
+
 }
