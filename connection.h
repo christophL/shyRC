@@ -18,6 +18,7 @@ class connection
 {
 public:
     connection();
+    ~connection();
     bool connect(user &user, server &server);
     void disconnect();
 private:

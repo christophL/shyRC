@@ -2,6 +2,7 @@
 #include "mainwindow.h"
 #include "libircclient.h"
 #include "connection.h"
+#include <memory>
 
 #include <iostream>
 
@@ -9,17 +10,15 @@ using namespace std;
 
 int main(int argc, char *argv[])
 {
-    connection con;
+    unique_ptr<connection> con = unique_ptr<connection>(new connection);
     user hugo("xXxD4RkHuGoxXx", "Hugo Hurtig");
     server rizon("Rizon");
     rizon.set_address("irc.rizon.net");
 
-    if(!con.connect(hugo, rizon)) {
+    if(!con->connect(hugo, rizon)) {
         cout << "Could not create IRC session" << endl;
         return EXIT_FAILURE;
     }
-
-    con.disconnect();
 
     QApplication a(argc, argv);
     MainWindow w;

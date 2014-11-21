@@ -47,6 +47,10 @@ connection::connection() {
     session = irc_create_session(&callbacks);
 }
 
+connection::~connection() {
+    disconnect();
+}
+
 bool connection::connect(user &user, server &server) {
     if(!session) return false;
     irc_connect(session, server.get_address().c_str(), 0, 0,
