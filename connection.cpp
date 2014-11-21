@@ -1,6 +1,6 @@
 #include "connection.h"
 #include "logger.h"
-
+#include <thread>
 
 #include <sstream>
 
@@ -48,6 +48,9 @@ connection::connection() {
 }
 
 connection::~connection() {
+    if (irc_is_connected(session)) {
+        irc_cmd_quit(session, "Kebap mit Zwiebeln");
+    }
     disconnect();
 }
 
@@ -56,7 +59,18 @@ bool connection::connect(user &user, server &server) {
     irc_connect(session, server.get_address().c_str(), 0, 0,
                 user.get_nick().c_str(), user.get_nick2().c_str(),
                 user.get_fullname().c_str());
+
+    thread (run, session).detach();
+
     return true;
+}
+
+void connection::run(irc_session_t *session) {
+    if (irc_run(session)) {
+        // TODO: Display connection not possible window
+        return;
+    }
+    // TODO: Display disconnected from server window?
 }
 
 void connection::disconnect() {
