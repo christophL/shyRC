@@ -1,6 +1,9 @@
 #ifndef SERVERDIALOG_H
 #define SERVERDIALOG_H
 
+#include "server.h"
+#include "user.h"
+
 #include <QDialog>
 
 namespace Ui {
@@ -18,8 +21,14 @@ public:
 private slots:
     void on_btn_cancel_clicked();
 
+    void on_btn_connect_clicked();
+
 private:
     Ui::serverDialog *ui;
+    server res_server;
+    user res_user;
+    QPalette error_color;
+    QPalette normal_color;
 };
 
 #endif // SERVERDIALOG_H

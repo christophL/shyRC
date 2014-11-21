@@ -12,6 +12,7 @@
 class user {
 private:
     std::string fullname;
+    std::string username;
     std::string nick;
     std::string nick2;
     std::string nick3;
@@ -20,10 +21,12 @@ public:
     user() = default;
     user(std::string fullname, std::string nick);
     void set_fullname(std::string name);
+    void set_username(std::string username);
     void set_nick(std::string nick);
     void set_nick2(std::string nick2);
     void set_nick3(std::string nick3);
     std::string get_fullname() const;
+    std::string get_username() const;
     std::string get_nick() const;
     std::string get_nick2() const;
     std::string get_nick3() const;

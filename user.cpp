@@ -10,6 +10,10 @@ string user::get_fullname() const{
     return fullname;
 }
 
+string user::get_username() const{
+    return username;
+}
+
 string user::get_nick() const{
     return nick;
 }
@@ -24,6 +28,10 @@ string user::get_nick3() const{
 
 void user::set_fullname(string name){
     this->fullname = name;
+}
+
+void user::set_username(string username){
+    this->username = username;
 }
 
 void user::set_nick(string nick){

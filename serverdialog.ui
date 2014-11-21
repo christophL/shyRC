@@ -13,7 +13,7 @@
   <property name="windowTitle">
    <string>Dialog</string>
   </property>
-  <widget class="QWidget" name="">
+  <widget class="QWidget" name="layoutWidget">
    <property name="geometry">
     <rect>
      <x>210</x>
@@ -42,7 +42,7 @@
     </item>
    </layout>
   </widget>
-  <widget class="QWidget" name="">
+  <widget class="QWidget" name="layoutWidget">
    <property name="geometry">
     <rect>
      <x>10</x>
@@ -116,7 +116,7 @@
        <widget class="QLineEdit" name="le_username"/>
       </item>
       <item>
-       <widget class="QLineEdit" name="leFullname"/>
+       <widget class="QLineEdit" name="le_fullname"/>
       </item>
      </layout>
     </item>
