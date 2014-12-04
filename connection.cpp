@@ -23,7 +23,6 @@ void connection::dump_event(irc_session_t *session, const char *event, const cha
               << "\", origin: \"" << (origin ? origin : "NULL")
               << "\", params: " << int(count) << "[" << info << "]" << endl;
     logger::log(logstring.str());
-    logger::log("asdf");
 
     irc_ctx_t *ctx = static_cast<irc_ctx_t *>(irc_get_ctx(session));
     emit(ctx->conn->text_received(QString(logstring.str().c_str())));
