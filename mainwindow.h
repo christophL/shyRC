@@ -23,14 +23,15 @@ public:
 
 private slots:
     void on_actionConnect_triggered();
-    void on_text_received();
+public slots:
+    void on_text_received(QString received);
 
 private:
     Ui::MainWindow *ui;
     user cur_user;
     server cur_server;
     std::unique_ptr<connection> cur_conn;
-    bool do_connect(user u, server s);
+    bool do_connect();
 };
 
 #endif // MAINWINDOW_H

@@ -6,11 +6,11 @@ server::server(string name) : name(name){
 
 }
 
-string server::get_name() const{
+const string &server::get_name() const{
     return name;
 }
 
-string server::get_address() const{
+const string &server::get_address() const{
     return address;
 }
 

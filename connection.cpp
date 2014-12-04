@@ -3,8 +3,11 @@
 #include <thread>
 
 #include <sstream>
+#include <functional>
+#include <thread>
 
 using namespace std;
+using namespace std::placeholders;
 
 void connection::dump_event(irc_session_t *session, const char *event, const char *origin, const char **params, unsigned count) {
     string info;
@@ -20,6 +23,10 @@ void connection::dump_event(irc_session_t *session, const char *event, const cha
               << "\", origin: \"" << (origin ? origin : "NULL")
               << "\", params: " << int(count) << "[" << info << "]" << endl;
     logger::log(logstring.str());
+    logger::log("asdf");
+
+    irc_ctx_t *ctx = static_cast<irc_ctx_t *>(irc_get_ctx(session));
+    emit(ctx->conn->text_received(QString(logstring.str().c_str())));
 }
 
 void connection::event_numeric(irc_session_t *session, unsigned event, const char *origin, const char **params, unsigned count) {
@@ -38,9 +45,6 @@ void connection::event_connect(irc_session_t *session, const char *event, const 
 
 
 connection::connection() {
-    irc_callbacks_t callbacks;
-    memset (&callbacks, 0, sizeof(callbacks));
-
     callbacks.event_connect = event_connect;
     callbacks.event_numeric = event_numeric;
 
@@ -56,21 +60,34 @@ connection::~connection() {
 
 bool connection::connect(user &user, server &server) {
     if(!session) return false;
-    irc_connect(session, server.get_address().c_str(), 0, 0,
+    ctx.nick = user.get_nick().c_str();
+    ctx.conn = this;
+    irc_set_ctx(session, &ctx);
+    string logstring("establishing connection to " + server.get_address());
+    emit(text_received(QString(logstring.c_str())));
+    if(irc_connect(session, server.get_address().c_str(), server.get_port(), 0,
                 user.get_nick().c_str(), user.get_nick2().c_str(),
-                user.get_fullname().c_str());
+                user.get_fullname().c_str())){
+        logger::log("could not establish connection.");
+        return false;
+    };
 
-    std::thread(run, session).detach();
+    std::thread(&connection::run, this, session).detach();
 
     return true;
 }
 
 void connection::run(irc_session_t *session) {
+    logger::log("starting irc loop in new thread");
     if (irc_run(session)) {
         // TODO: Display connection not possible window
+        string logstring("connection could not be established: " + string(irc_strerror(irc_errno(session))));
+        logger::log(logstring);
+        emit(text_received(QString(logstring.c_str())));
         return;
     }
     // TODO: Display disconnected from server window?
+    logger::log("user disconnected from server");
 }
 
 void connection::disconnect() {

@@ -13,9 +13,9 @@ public:
     server() = default;
     server(std::string name);
     void set_name(std::string name);
-    bool set_address(std::string address, uint16_t port = 0);
-    std::string get_name() const;
-    std::string get_address() const;
+    bool set_address(std::string address, uint16_t port = 6667);
+    const std::string &get_name() const;
+    const std::string &get_address() const;
     uint16_t get_port() const;
     bool operator==(const server& other) const;
     bool operator!=(const server& other) const;

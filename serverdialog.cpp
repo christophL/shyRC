@@ -52,7 +52,7 @@ void serverDialog::on_btn_connect_clicked()
     res_server.set_address(ui->le_server->text().toStdString());
     res_server.set_name(ui->le_server->text().toStdString());
     setResult(QDialog::DialogCode::Accepted);
-    close();
+    hide();
 }
 
 server serverDialog::get_server() const{
