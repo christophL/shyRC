@@ -11,7 +11,6 @@
 class connection;
 typedef struct
 {
-    const char *channel;
     const char *nick;
     connection *conn;
 

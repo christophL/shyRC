@@ -34,6 +34,12 @@ void MainWindow::on_actionConnect_triggered()
     }
 }
 
+void MainWindow::on_actionDisconnect_triggered()
+{
+    cur_conn->disconnect();
+    ui->actionDisconnect->setEnabled(false);
+}
+
 void MainWindow::on_text_received(QString received){
     ui->txt_channel_msg->append(received);
 }
@@ -46,5 +52,6 @@ bool MainWindow::do_connect(){
         std::cout << "Could not create IRC session" << endl;
         return false;
     }
+    ui->actionDisconnect->setEnabled(true);
     return true;
 }

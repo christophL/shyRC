@@ -23,6 +23,8 @@ public:
 
 private slots:
     void on_actionConnect_triggered();
+    void on_actionDisconnect_triggered();
+
 public slots:
     void on_text_received(QString received);
 

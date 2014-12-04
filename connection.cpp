@@ -39,11 +39,12 @@ void connection::event_connect(irc_session_t *session, const char *event, const 
     irc_ctx_t *ctx = static_cast<irc_ctx_t *>(irc_get_ctx(session));
     dump_event(session, event, origin, params, count);
 
-    irc_cmd_join(session, ctx->channel, 0);
+    //irc_cmd_join(session, ctx->channel, 0);
 }
 
 
 connection::connection() {
+    memset (&callbacks, 0, sizeof(callbacks));
     callbacks.event_connect = event_connect;
     callbacks.event_numeric = event_numeric;
 
@@ -51,9 +52,6 @@ connection::connection() {
 }
 
 connection::~connection() {
-    if (irc_is_connected(session)) {
-        irc_cmd_quit(session, "Kebap mit Zwiebeln");
-    }
     disconnect();
 }
 
@@ -72,7 +70,6 @@ bool connection::connect(user &user, server &server) {
     };
 
     std::thread(&connection::run, this, session).detach();
-
     return true;
 }
 
@@ -90,7 +87,11 @@ void connection::run(irc_session_t *session) {
 }
 
 void connection::disconnect() {
-    irc_disconnect(session);
-    irc_destroy_session(session);
+    if (session != nullptr && irc_is_connected(session)) {
+        irc_cmd_quit(session, "Kebap mit Zwiebeln");
+        irc_disconnect(session);
+        irc_destroy_session(session);
+        session = nullptr;
+    }
 }
 
