@@ -7,6 +7,7 @@ MainWindow::MainWindow(QWidget *parent) :
     ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
+    ui->splitter->setSizes({150, 400, 100});
 }
 
 MainWindow::~MainWindow()
@@ -27,7 +28,23 @@ void MainWindow::on_actionConnect_triggered()
     dialog.exec();
 
     if(dialog.result() == QDialog::DialogCode::Accepted){
-        //TODO: start IRC connection
+        do_connect(dialog.get_user(), dialog.get_server());
     }
+}
 
+void MainWindow::on_text_received(){
+
+}
+
+bool MainWindow::do_connect(user u, server s){
+    cur_conn = unique_ptr<connection>(new connection());
+    connect(cur_conn.get(), SIGNAL(connection::text_received(std::string)), this, SLOT(on_text_received()));
+    cur_user = u;
+    cur_server = s;
+
+    if(!cur_conn->connect(cur_user, cur_server)) {
+        std::cout << "Could not create IRC session" << endl;
+        return false;
+    }
+    return true;
 }

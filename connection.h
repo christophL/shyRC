@@ -6,6 +6,7 @@
 #include <string>
 #include <cstring>
 #include <cstdio>
+#include <QObject>
 
 typedef struct
 {
@@ -14,13 +15,16 @@ typedef struct
 
 } irc_ctx_t;
 
-class connection
+class connection : public QObject
 {
+    Q_OBJECT
 public:
     connection();
     ~connection();
     bool connect(user &user, server &server);
     void disconnect();
+signals:
+    void text_received(std::string);
 private:
     irc_session_t *session;
     static void run(irc_session_t *session);

@@ -17,6 +17,8 @@ class serverDialog : public QDialog
 public:
     explicit serverDialog(QWidget *parent = 0);
     ~serverDialog();
+    user get_user() const;
+    server get_server() const;
 
 private slots:
     void on_btn_cancel_clicked();

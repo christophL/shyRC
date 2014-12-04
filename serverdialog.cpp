@@ -54,3 +54,11 @@ void serverDialog::on_btn_connect_clicked()
     setResult(QDialog::DialogCode::Accepted);
     close();
 }
+
+server serverDialog::get_server() const{
+    return res_server;
+}
+
+user serverDialog::get_user() const{
+    return res_user;
+}

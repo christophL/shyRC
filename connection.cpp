@@ -60,7 +60,7 @@ bool connection::connect(user &user, server &server) {
                 user.get_nick().c_str(), user.get_nick2().c_str(),
                 user.get_fullname().c_str());
 
-    thread (run, session).detach();
+    std::thread(run, session).detach();
 
     return true;
 }
