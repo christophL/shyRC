@@ -3,9 +3,11 @@
 #include "server.h"
 #include "user.h"
 #include "libircclient.h"
+#include "libirc_rfcnumeric.h"
 #include <string>
 #include <cstring>
 #include <cstdio>
+#include <thread>
 #include <QObject>
 
 class connection;
@@ -31,6 +33,7 @@ private:
     irc_session_t *session;
     irc_callbacks_t callbacks;
     irc_ctx_t ctx;
+    std::thread looper;
     void run(irc_session_t *session);
     static void event_connect(irc_session_t *session, const char *event, const char *origin, const char **params, unsigned count);
     static void event_numeric(irc_session_t *session, unsigned event, const char *origin, const char **params, unsigned count);

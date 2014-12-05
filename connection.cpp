@@ -1,13 +1,10 @@
 #include "connection.h"
 #include "logger.h"
-#include <thread>
 
 #include <sstream>
-#include <functional>
-#include <thread>
+
 
 using namespace std;
-using namespace std::placeholders;
 
 void connection::dump_event(irc_session_t *session, const char *event, const char *origin, const char **params, unsigned count) {
     string info;
@@ -53,6 +50,8 @@ connection::connection() {
 
 connection::~connection() {
     disconnect();
+    irc_disconnect(session);
+    irc_destroy_session(session);
 }
 
 bool connection::connect(user &user, server &server) {
@@ -69,7 +68,7 @@ bool connection::connect(user &user, server &server) {
         return false;
     };
 
-    std::thread(&connection::run, this, session).detach();
+    looper = std::thread(&connection::run, this, session);
     return true;
 }
 
@@ -77,21 +76,16 @@ void connection::run(irc_session_t *session) {
     logger::log("starting irc loop in new thread");
     if (irc_run(session)) {
         // TODO: Display connection not possible window
-        string logstring("connection could not be established: " + string(irc_strerror(irc_errno(session))));
+        string logstring("disconnected: " + string(irc_strerror(irc_errno(session))));
         logger::log(logstring);
         emit(text_received(QString(logstring.c_str())));
-        return;
     }
-    // TODO: Display disconnected from server window?
-    logger::log("user disconnected from server");
 }
 
 void connection::disconnect() {
-    if (session != nullptr && irc_is_connected(session)) {
+    if (irc_is_connected(session)) {
         irc_cmd_quit(session, "Kebap mit Zwiebeln");
-        irc_disconnect(session);
-        irc_destroy_session(session);
-        session = nullptr;
+        looper.join();
     }
 }
 

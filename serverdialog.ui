@@ -101,22 +101,46 @@
     <item>
      <layout class="QVBoxLayout" name="verticalLayout_2">
       <item>
-       <widget class="QLineEdit" name="le_server"/>
+       <widget class="QLineEdit" name="le_server">
+        <property name="text">
+         <string>irc.rizon.net</string>
+        </property>
+       </widget>
       </item>
       <item>
-       <widget class="QLineEdit" name="le_nick"/>
+       <widget class="QLineEdit" name="le_nick">
+        <property name="text">
+         <string>blaaaah</string>
+        </property>
+       </widget>
       </item>
       <item>
-       <widget class="QLineEdit" name="le_nick2"/>
+       <widget class="QLineEdit" name="le_nick2">
+        <property name="text">
+         <string>wqerer</string>
+        </property>
+       </widget>
       </item>
       <item>
-       <widget class="QLineEdit" name="le_nick3"/>
+       <widget class="QLineEdit" name="le_nick3">
+        <property name="text">
+         <string>dfdfdff</string>
+        </property>
+       </widget>
       </item>
       <item>
-       <widget class="QLineEdit" name="le_username"/>
+       <widget class="QLineEdit" name="le_username">
+        <property name="text">
+         <string>cvcvcv</string>
+        </property>
+       </widget>
       </item>
       <item>
-       <widget class="QLineEdit" name="le_fullname"/>
+       <widget class="QLineEdit" name="le_fullname">
+        <property name="text">
+         <string>hjhjhjhjhj</string>
+        </property>
+       </widget>
       </item>
      </layout>
     </item>
