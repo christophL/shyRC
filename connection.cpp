@@ -22,7 +22,7 @@ void connection::dump_event(irc_session_t *session, const char *event, const cha
     logger::log(logstring.str());
 
     irc_ctx_t *ctx = static_cast<irc_ctx_t *>(irc_get_ctx(session));
-    emit(ctx->conn->text_received(QString(logstring.str().c_str())));
+    emit(ctx->conn->text_received(QString(info.c_str())));
 }
 
 void connection::event_numeric(irc_session_t *session, unsigned event, const char *origin, const char **params, unsigned count) {
@@ -68,7 +68,7 @@ bool connection::connect(user &user, server &server) {
         return false;
     };
 
-    looper = std::thread(&connection::run, this, session);
+    looper = std::thread([this]{run(session);});
     return true;
 }
 
