@@ -18,7 +18,8 @@ SOURCES += main.cpp\
     server.cpp \
     channel.cpp \
     serverdialog.cpp \
-    connection.cpp
+    connection.cpp \
+    baseuser.cpp
 
 HEADERS  += mainwindow.h \
     user.h \
@@ -26,7 +27,8 @@ HEADERS  += mainwindow.h \
     channel.h \
     serverdialog.h \
     connection.h \
-    logger.h
+    logger.h \
+    baseuser.h
 
 FORMS    += mainwindow.ui \
     serverdialog.ui
