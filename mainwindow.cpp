@@ -1,6 +1,7 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 #include "serverdialog.h"
+#include "command.h"
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -54,4 +55,20 @@ bool MainWindow::do_connect(){
     }
     ui->actionDisconnect->setEnabled(true);
     return true;
+}
+
+void MainWindow::on_le_cmd_returnPressed()
+{
+    QString input = ui->le_cmd->text();
+    if(input.startsWith('/')){
+        QStringList parts = input.split(' ');
+        unique_ptr<command> cmd = command::create(parts[0].toStdString());
+        if(cmd == nullptr){
+            //print error
+        } else {
+            cur_conn->execute_command(cmd.get());
+        }
+    } else {
+
+    }
 }

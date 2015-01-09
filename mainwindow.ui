@@ -95,15 +95,10 @@
             </item>
            </layout>
           </widget>
-          <widget class="QWidget" name="tab_2">
-           <attribute name="title">
-            <string>Tab 2</string>
-           </attribute>
-          </widget>
          </widget>
         </item>
         <item>
-         <widget class="QLineEdit" name="lineEdit">
+         <widget class="QLineEdit" name="le_cmd">
           <property name="sizePolicy">
            <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
             <horstretch>0</horstretch>

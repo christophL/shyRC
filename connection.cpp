@@ -54,7 +54,7 @@ connection::~connection() {
     irc_destroy_session(session);
 }
 
-bool connection::connect(user &user, server &server) {
+bool connection::connect(const user &user, const server &server) {
     if(!session) return false;
     ctx.nick = user.get_nick().c_str();
     ctx.conn = this;
@@ -87,5 +87,9 @@ void connection::disconnect() {
         irc_cmd_quit(session, "Kebap mit Zwiebeln");
         looper.join();
     }
+}
+
+void connection::execute_command(command *cmd) const{
+    cmd->execute(session);
 }
 

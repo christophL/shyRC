@@ -19,7 +19,8 @@ SOURCES += main.cpp\
     channel.cpp \
     serverdialog.cpp \
     connection.cpp \
-    baseuser.cpp
+    command.cpp \
+    join_command.cpp
 
 HEADERS  += mainwindow.h \
     user.h \
@@ -28,7 +29,8 @@ HEADERS  += mainwindow.h \
     serverdialog.h \
     connection.h \
     logger.h \
-    baseuser.h
+    command.h \
+    join_command.h
 
 FORMS    += mainwindow.ui \
     serverdialog.ui

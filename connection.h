@@ -2,6 +2,7 @@
 #define CONNECTION_H
 #include "server.h"
 #include "user.h"
+#include "command.h"
 #include "libircclient.h"
 #include "libirc_rfcnumeric.h"
 #include <string>
@@ -25,8 +26,9 @@ class connection : public QObject
 public:
     connection();
     ~connection();
-    bool connect(user &user, server &server);
+    bool connect(const user &user, const server &server);
     void disconnect();
+    void execute_command(command *cmd) const;
 signals:
     void text_received(QString received);
 private:
