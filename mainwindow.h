@@ -29,6 +29,7 @@ private slots:
 
 public slots:
     void on_text_received(QString received);
+    void on_channel_joined(QString channel);
 
 private:
     Ui::MainWindow *ui;

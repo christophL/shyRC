@@ -31,6 +31,7 @@ public:
     void execute_command(command *cmd) const;
 signals:
     void text_received(QString received);
+    void channel_joined(QString channel);
 private:
     irc_session_t *session;
     irc_callbacks_t callbacks;
@@ -40,6 +41,7 @@ private:
     static void event_connect(irc_session_t *session, const char *event, const char *origin, const char **params, unsigned count);
     static void event_numeric(irc_session_t *session, unsigned event, const char *origin, const char **params, unsigned count);
     static void dump_event (irc_session_t *session, const char *event, const char *origin, const char **params, unsigned count);
+    static void event_join(irc_session_t *session, const char *event, const char *origin, const char **params, unsigned count);
 };
 
 #endif // CONNECTION_H

@@ -45,9 +45,14 @@ void MainWindow::on_text_received(QString received){
     ui->txt_channel_msg->append(received);
 }
 
+void MainWindow::on_channel_joined(QString channel){
+
+}
+
 bool MainWindow::do_connect(){
     cur_conn = unique_ptr<connection>(new connection());
     connect(cur_conn.get(), SIGNAL(text_received(QString)), this, SLOT(on_text_received(QString)));
+    connect(cur_conn.get(), SIGNAL(channel_joined(QString)), this, SLOT(on_channel_joined(QString)));
 
     if(!cur_conn->connect(cur_user, cur_server)) {
         std::cout << "Could not create IRC session" << endl;
@@ -62,7 +67,7 @@ void MainWindow::on_le_cmd_returnPressed()
     QString input = ui->le_cmd->text();
     if(input.startsWith('/')){
         QStringList parts = input.split(' ');
-        unique_ptr<command> cmd = command::create(parts[0].toStdString());
+        unique_ptr<command> cmd = command::create(parts);
         if(cmd == nullptr){
             //print error
         } else {
