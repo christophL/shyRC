@@ -50,12 +50,12 @@ void MainWindow::on_channel_joined(QString channel){
 }
 
 bool MainWindow::do_connect(){
-    cur_conn = unique_ptr<connection>(new connection());
+    cur_conn = std::unique_ptr<connection>(new connection());
     connect(cur_conn.get(), SIGNAL(text_received(QString)), this, SLOT(on_text_received(QString)));
     connect(cur_conn.get(), SIGNAL(channel_joined(QString)), this, SLOT(on_channel_joined(QString)));
 
     if(!cur_conn->connect(cur_user, cur_server)) {
-        std::cout << "Could not create IRC session" << endl;
+        std::cout << "Could not create IRC session" << std::endl;
         return false;
     }
     ui->actionDisconnect->setEnabled(true);
@@ -66,7 +66,7 @@ void MainWindow::on_le_cmd_returnPressed()
 {
     QString input = ui->le_cmd->text();
     ui->le_cmd->clear();
-    unique_ptr<command> cmd = command::create(cur_channel, input);
+    std::unique_ptr<command> cmd = command::create(cur_channel, input);
     if(cmd == nullptr){
         //print error
     } else {

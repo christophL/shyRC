@@ -2,11 +2,6 @@
 #include "join_command.h"
 #include "msg_command.h"
 
-command::command()
-{
-
-}
-
 std::unique_ptr<command> command::create(QString channel, QString parameters){
     if(parameters.startsWith('/')){
         QStringList parameterlist = parameters.split(" ");
@@ -25,10 +20,5 @@ std::unique_ptr<command> command::create(QString channel, QString parameters){
         return cmd;
     }
     return nullptr;
-}
-
-command::~command()
-{
-
 }
 

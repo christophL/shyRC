@@ -6,7 +6,6 @@
 #include <set>
 
 #include "server.h"
-#include "channel.h"
 
 class user {
 private:
