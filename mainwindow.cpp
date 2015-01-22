@@ -46,7 +46,7 @@ void MainWindow::on_text_received(QString received){
 }
 
 void MainWindow::on_channel_joined(QString channel){
-
+    cur_channel = channel;
 }
 
 bool MainWindow::do_connect(){
@@ -65,15 +65,11 @@ bool MainWindow::do_connect(){
 void MainWindow::on_le_cmd_returnPressed()
 {
     QString input = ui->le_cmd->text();
-    if(input.startsWith('/')){
-        QStringList parts = input.split(' ');
-        unique_ptr<command> cmd = command::create(parts);
-        if(cmd == nullptr){
-            //print error
-        } else {
-            cur_conn->execute_command(cmd.get());
-        }
+    ui->le_cmd->clear();
+    unique_ptr<command> cmd = command::create(cur_channel, input);
+    if(cmd == nullptr){
+        //print error
     } else {
-
+        cur_conn->execute_command(cmd.get());
     }
 }

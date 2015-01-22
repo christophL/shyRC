@@ -42,6 +42,7 @@ private:
     static void event_numeric(irc_session_t *session, unsigned event, const char *origin, const char **params, unsigned count);
     static void dump_event (irc_session_t *session, const char *event, const char *origin, const char **params, unsigned count);
     static void event_join(irc_session_t *session, const char *event, const char *origin, const char **params, unsigned count);
+    static void event_channel(irc_session_t *session, const char *event, const char *origin, const char **params, unsigned count);
 };
 
 #endif // CONNECTION_H

@@ -8,7 +8,7 @@ using namespace std;
 
 void connection::dump_event(irc_session_t *session, const char *event, const char *origin, const char **params, unsigned count) {
     string info;
-
+    if(origin) info.append(origin).append("| ");
     for (unsigned i = 0; i < count; i++) {
         if (i) {
             info.append("|");
@@ -35,16 +35,17 @@ void connection::event_numeric(irc_session_t *session, unsigned event, const cha
 void connection::event_connect(irc_session_t *session, const char *event, const char *origin, const char **params, unsigned count) {
     irc_ctx_t *ctx = static_cast<irc_ctx_t *>(irc_get_ctx(session));
     dump_event(session, event, origin, params, count);
-
-    //irc_cmd_join(session, ctx->channel, 0);
 }
 
 void connection::event_join(irc_session_t *session, const char *event, const char *origin, const char **params, unsigned count) {
     irc_ctx_t *ctx = static_cast<irc_ctx_t *>(irc_get_ctx(session));
     dump_event(session, event, origin, params, count);
+    emit(ctx->conn->channel_joined(QString(params[0])));
+}
 
-
-    //irc_cmd_join(session, ctx->channel, 0);
+void connection::event_channel(irc_session_t *session, const char *event, const char *origin, const char **params, unsigned count){
+    dump_event(session, event, origin, params, count);
+    irc_ctx_t *ctx = static_cast<irc_ctx_t *>(irc_get_ctx(session));
 }
 
 
@@ -52,6 +53,7 @@ connection::connection() {
     memset (&callbacks, 0, sizeof(callbacks));
     callbacks.event_connect = event_connect;
     callbacks.event_join = event_join;
+    callbacks.event_channel = event_channel;
 
     callbacks.event_numeric = event_numeric;
 

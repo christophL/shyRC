@@ -20,7 +20,8 @@ SOURCES += main.cpp\
     serverdialog.cpp \
     connection.cpp \
     command.cpp \
-    join_command.cpp
+    join_command.cpp \
+    msg_command.cpp
 
 HEADERS  += mainwindow.h \
     user.h \
@@ -30,7 +31,8 @@ HEADERS  += mainwindow.h \
     connection.h \
     logger.h \
     command.h \
-    join_command.h
+    join_command.h \
+    msg_command.h
 
 FORMS    += mainwindow.ui \
     serverdialog.ui

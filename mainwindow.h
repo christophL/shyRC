@@ -35,6 +35,7 @@ private:
     Ui::MainWindow *ui;
     user cur_user;
     server cur_server;
+    QString cur_channel;
     std::unique_ptr<connection> cur_conn;
     bool do_connect();
 };
