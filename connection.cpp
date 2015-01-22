@@ -19,7 +19,7 @@ void connection::dump_event(irc_session_t *session, const char *event, const cha
     logstring << "Event \"" << event
               << "\", origin: \"" << (origin ? origin : "NULL")
               << "\", params: " << int(count) << "[" << info << "]" << endl;
-    logger::log(logstring.str());
+    logger<DEBUG>::log(logstring.str());
 
     irc_ctx_t *ctx = static_cast<irc_ctx_t *>(irc_get_ctx(session));
     emit(ctx->conn->text_received(QString(info.c_str())));
@@ -76,7 +76,7 @@ bool connection::connect(const user &user, const server &server) {
     if(irc_connect(session, server.get_address().c_str(), server.get_port(), 0,
                 user.get_nick().c_str(), user.get_nick2().c_str(),
                 user.get_fullname().c_str())){
-        logger::log("could not establish connection.");
+        logger<ERROR>::log("could not establish connection.");
         return false;
     };
 
@@ -85,11 +85,11 @@ bool connection::connect(const user &user, const server &server) {
 }
 
 void connection::run(irc_session_t *session) {
-    logger::log("starting irc loop in new thread");
+    logger<DEBUG>::log("starting irc loop in new thread");
     if (irc_run(session)) {
         // TODO: Display connection not possible window
         string logstring("disconnected: " + string(irc_strerror(irc_errno(session))));
-        logger::log(logstring);
+        logger<DEBUG>::log(logstring);
         emit(text_received(QString(logstring.c_str())));
     }
 }
