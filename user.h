@@ -4,8 +4,16 @@
 #include <string>
 #include <map>
 #include <set>
+#include <algorithm>
 
 #include "server.h"
+
+template<typename T>
+struct hugo{
+    T x;
+    hugo(T c) { x = c; }
+    bool operator()(T c){ return c == x; }
+};
 
 class user {
 private:
@@ -29,6 +37,16 @@ public:
     const std::string &get_nick2() const;
     const std::string &get_nick3() const;
     bool add_favorite_channel(server& server, std::string channel);
+
+    std::string do_stuff(){
+        std::string blah(nick);
+        std::for_each(blah.begin(), blah.end(), [](char &c){c++;});
+        return blah;
+    }
+
+    int count_stuff(char blah) const{
+        return std::count_if(nick.begin(), nick.end(), hugo<char>(blah));
+    }
 };
 
 #endif // USER_H
